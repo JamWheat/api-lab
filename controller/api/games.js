@@ -1,4 +1,5 @@
 const Game = require('../../models/game')
+const game = require('../../models/game')
 
 module.exports = {
   index,
@@ -27,9 +28,13 @@ function newGame(req, res){
 }
 
 function update(req, res){
-  
+  Game.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((game) => {
+    res.status(200).json(game)
+  })
 }
 
 function deleteOne(req, res){
-  
+  Game.findByIdAndDelete(req.params.id).then((game) => {
+    res.status(200).json(game)
+  })
 }
